@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Transferência de Alunos – CECIA</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cecia-red: #8b0000;
+  --text: #222;
+  --blue1: #007cf0;
+  --blue2: #00dfd8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, Arial, sans-serif;
+  background: #fff;
+  color: var(--text);
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: var(--cecia-red);
+  padding: 18px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.header-inner {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.header img { height: 90px; }
+
+.title { text-align: center; }
+
+.course {
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--blue1), var(--blue2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cecia {
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.ufsj {
+  font-size: 14px;
+  color: #eee;
+}
+
+/* ===== CONTEÚDO ===== */
+.main {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.datas {
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+/* ===== AVISO ===== */
+.aviso {
+  background:#fff3cd;
+  border:1px solid #ffeeba;
+  color:#856404;
+  padding:14px 18px;
+  border-radius:8px;
+  margin-bottom:30px;
+  font-weight:600;
+  text-align:center;
+}
+
+/* ===== PASTAS ===== */
+.folder {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.folder-header {
+  padding: 14px 18px;
+  background: var(--cecia-red);
+  color: #fff;
+  font-weight: 600;
+}
+
+.folder-content {
+  padding: 12px 20px 18px;
+}
+
+.file { padding: 6px 0; }
+
+.file a {
+  color: #0047ab;
+  text-decoration: none;
+}
+
+.file a:hover { text-decoration: underline; }
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin: 60px 0 30px;
+}
+</style>
+</head>
+
+<body>
+
+<a href="https://cecia.ufsj.edu.br/" style="text-decoration:none; color:inherit;">
+  <div class="header">
+    <div class="header-inner">
+      <img src="https://cecia.ufsj.edu.br/assets/logo-ufsj-D8UfR3Y2.png" alt="UFSJ">
+
+      <div class="title">
+        <div class="course">Engenharia da Computação e Inteligência Artificial</div>
+        <div class="cecia">CECIA</div>
+        <div class="ufsj">Universidade Federal de São João del-Rei – UFSJ</div>
+      </div>
+
+      <img src="https://cecia.ufsj.edu.br/assets/mascote-labs-XYBaCOvj.png" alt="CECIA">
+    </div>
+  </div>
+</a>
+
+<div class="main">
+
+<div class="aviso">
+⚠️ <strong>Em construção – sem valor legal</strong>
+</div>
+
+<h2>Transferência de Alunos</h2>
+
+<div class="datas">
+Em conformidade com o <strong>Artigo 2º da Resolução nº 035, de 15 de dezembro de 2021</strong>,
+que regulamenta os processos seletivos de admissão aos cursos de graduação da UFSJ e
+as formas de alteração de vínculo, são consideradas formas regulares de ingresso
+nos cursos de graduação da UFSJ:
+</div>
+
+<div class="datas">
+<strong>Art. 2º</strong> São formas de ingresso regulares em curso de graduação da UFSJ:<br><br>
+
+<strong>I –</strong> Processo seletivo por classificação em sistema de seleção unificado para
+ingresso no ensino superior estabelecido pelo Ministério da Educação.<br>
+<strong>Informações adicionais:</strong>
+<a href="https://ufsj.edu.br/copeve/index.php" target="_blank">
+https://ufsj.edu.br/copeve/index.php
+</a><br>
+<strong>Dúvidas:</strong> ✉ copeve@ufsj.edu.br<br><br>
+
+<strong>II –</strong> Processo seletivo especial;<br>
+<strong>III –</strong> Transferência <em>ex officio</em>;<br>
+<strong>IV –</strong> Processo seletivo de reocupação de vagas residuais;<br>
+<strong>V –</strong> Outras formas de ingresso definidas mediante convênio ou determinadas por lei.
+</div>
+
+<div id="transferencias">Carregando documentos...</div>
+
+</div>
+
+<!-- ================= DOCUMENTOS (GOOGLE DRIVE) ================= -->
+<script>
+const API_KEY = "AIzaSyACMK-L2y2-ZyJkwSkuu992Zug1dPFZgQM";
+const ROOT_FOLDER_TRANSFERENCIA = "14RscHN_bljW4RVMSxG0XZGaSn8KUyRQT";
+
+async function driveApi(q){
+  const url =
+    `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(q)}&fields=files(id,name,mimeType)&supportsAllDrives=true&includeItemsFromAllDrives=true&key=${API_KEY}`;
+  const r = await fetch(url);
+  return (await r.json()).files || [];
+}
+
+async function carregarTransferencias(){
+  const c = document.getElementById("transferencias");
+  c.innerHTML = "";
+
+  let pastas = await driveApi(
+    `'${ROOT_FOLDER_TRANSFERENCIA}' in parents and mimeType='application/vnd.google-apps.folder'`
+  );
+
+  pastas.sort((a,b)=>a.name.localeCompare(b.name,"pt-BR",{sensitivity:"base"}));
+
+  for(const p of pastas){
+    const box = document.createElement("div");
+    box.className = "folder";
+
+    const h = document.createElement("div");
+    h.className = "folder-header";
+    h.textContent = "📁 " + p.name;
+
+    const cont = document.createElement("div");
+    cont.className = "folder-content";
+
+    const arqs = await driveApi(
+      `'${p.id}' in parents and mimeType!='application/vnd.google-apps.folder'`
+    );
+
+    arqs.sort((a,b)=>a.name.localeCompare(b.name,"pt-BR",{sensitivity:"base"}))
+        .forEach(a=>{
+          cont.innerHTML += `
+            <div class="file">
+              📄 <a target="_blank" href="https://drive.google.com/file/d/${a.id}/view">
+                ${a.name}
+              </a>
+            </div>`;
+        });
+
+    box.appendChild(h);
+    box.appendChild(cont);
+    c.appendChild(box);
+  }
+}
+
+carregarTransferencias();
+</script>
+
+<!-- ================= DATA DE ATUALIZAÇÃO ================= -->
+<script>
+const DOC_DATA_ATUALIZACAO =
+  "https://docs.google.com/document/d/1JFwitBtLqErRXMFXXMSoMuC_sYdIz1Qq/export?format=txt";
+
+async function carregarDataAtualizacao(){
+  try{
+    const r = await fetch(DOC_DATA_ATUALIZACAO);
+    const t = (await r.text()).split(/\r?\n/).filter(l=>l.trim()).join(" ");
+    document.getElementById("data-atualizacao").innerHTML =
+      "<strong>Última atualização:</strong> " + t;
+  }catch{
+    document.getElementById("data-atualizacao").textContent =
+      "Última atualização: informação indisponível.";
+  }
+}
+
+carregarDataAtualizacao();
+</script>
+
+<div class="footer">
+Página institucional mantida pela Coordenação do Curso – CECIA / UFSJ.<br>
+<span id="data-atualizacao">Carregando data da última atualização...</span>
+</div>
+
+</body>
+</html>
