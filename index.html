@@ -4,120 +4,190 @@
 <meta charset="UTF-8">
 <title>Transferência de Alunos – CECIA</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
   --cecia-red: #8b0000;
+  --cecia-red-dark: #7a0000;
   --text: #222;
-  --blue1: #007cf0;
-  --blue2: #00dfd8;
 }
 
-* { box-sizing: border-box; }
+/* ===== RESET ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  margin: 0;
   font-family: "Inter", system-ui, Arial, sans-serif;
   background: #fff;
   color: var(--text);
 }
 
-/* ===== HEADER ===== */
+/* =========================================================
+   HEADER MODERNO
+   ========================================================= */
+.header-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .header {
-  background: var(--cecia-red);
-  padding: 18px 0;
-  display: flex;
-  justify-content: center;
+  background: linear-gradient(135deg, var(--cecia-red-dark), var(--cecia-red));
+  padding: 28px 0 18px;
 }
 
 .header-inner {
-  max-width: 1200px;
-  width: 100%;
-  padding: 0 24px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-.header img { height: 90px; }
+/* Grupo central (logos + título) */
+.header-group {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  column-gap: 12px;
+  margin-bottom: 18px;
+}
 
-.title { text-align: center; }
+/* Logos */
+.logo {
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.logo-ufsj {
+  height: 96px;
+}
+
+.logo-cecia {
+  height: 120px;
+}
+
+/* Texto */
+.title {
+  text-align: center;
+  max-width: 600px;
+}
 
 .course {
-  font-size: 32px;
+  font-size: clamp(22px, 3vw, 34px);
   font-weight: 700;
-  background: linear-gradient(90deg, var(--blue1), var(--blue2));
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  background: linear-gradient(90deg, #ffffff, #dddddd);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.cecia {
-  color: #fff;
-  font-size: 18px;
-  letter-spacing: 2px;
-  font-weight: 600;
-}
-
 .ufsj {
+  display: block;
+  margin-top: 6px;
   font-size: 14px;
-  color: #eee;
+  letter-spacing: 1px;
+  color: #f2f2f2;
 }
 
-/* ===== CONTEÚDO ===== */
+/* Hover sutil */
+.header-link:hover .logo {
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   NAVEGAÇÃO DO HEADER
+   ========================================================= */
+.header-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.header-nav a {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #ffffff;
+  background: rgba(255,255,255,0.08);
+  border: none;
+  border-radius: 4px;     /* leve, moderno */
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.header-nav a:hover {
+  background: rgba(255,255,255,0.22);
+}
+
+
+
+
+
+/* Mobile */
+@media (max-width: 768px) {
+  .header-group {
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+    text-align: center;
+  }
+
+  .logo {
+    margin: 0 auto;
+  }
+
+  .logo-cecia {
+    height: 100px;
+  }
+}
+
+/* =========================================================
+   CONTEÚDO INSTITUCIONAL
+   ========================================================= */
 .main {
   max-width: 1100px;
   margin: 40px auto;
   padding: 0 24px;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.main h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
 
 .datas {
-  font-size: 15px;
-  line-height: 1.7;
   margin-bottom: 30px;
 }
 
-/* ===== AVISO ===== */
+.datas ul {
+  margin: 10px 0 0 20px;
+}
+
+/* Aviso */
 .aviso {
-  background:#fff3cd;
-  border:1px solid #ffeeba;
-  color:#856404;
-  padding:14px 18px;
-  border-radius:8px;
-  margin-bottom:30px;
-  font-weight:600;
-  text-align:center;
-}
-
-/* ===== PASTAS ===== */
-.folder {
-  background: #fafafa;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  margin-bottom: 16px;
-}
-
-.folder-header {
+  background: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
   padding: 14px 18px;
-  background: var(--cecia-red);
-  color: #fff;
+  border-radius: 6px;
+  margin-bottom: 30px;
   font-weight: 600;
+  text-align: center;
 }
 
-.folder-content {
-  padding: 12px 20px 18px;
-}
-
-.file { padding: 6px 0; }
-
-.file a {
-  color: #0047ab;
-  text-decoration: none;
-}
-
-.file a:hover { text-decoration: underline; }
-
-/* ===== FOOTER ===== */
+/* Footer */
 .footer {
   text-align: center;
   font-size: 14px;
@@ -129,21 +199,56 @@ body {
 
 <body>
 
-<a href="https://cecia.ufsj.edu.br/" style="text-decoration:none; color:inherit;">
-  <div class="header">
-    <div class="header-inner">
-      <img src="https://cecia.ufsj.edu.br/assets/logo-ufsj-D8UfR3Y2.png" alt="UFSJ">
+<header class="header">
+  <div class="header-inner">
+
+    <div class="header-group">
+
+      <a href="https://cecia.ufsj.edu.br/" class="logo-link" aria-label="Página inicial da UFSJ">
+        <img
+          class="logo logo-ufsj"
+          src="https://cecia.ufsj.edu.br/assets/logo-ufsj-D8UfR3Y2.png"
+          alt="Universidade Federal de São João del-Rei – UFSJ"
+        >
+      </a>
 
       <div class="title">
-        <div class="course">Engenharia da Computação e Inteligência Artificial</div>
-        <div class="cecia">CECIA</div>
-        <div class="ufsj">Universidade Federal de São João del-Rei – UFSJ</div>
+        <h1 class="course">Engenharia da Computação e Inteligência Artificial</h1>
+        <span class="ufsj">Universidade Federal de São João del-Rei – UFSJ</span>
       </div>
 
-      <img src="https://cecia.ufsj.edu.br/assets/mascote-labs-XYBaCOvj.png" alt="CECIA">
+      <a href="https://cecia.ufsj.edu.br/" class="logo-link" aria-label="Site do curso CECIA">
+        <img
+          class="logo logo-cecia"
+          src="https://github.com/ceciaUFSJ/gerador-planos/blob/main/cecia%20bco%20vertical.png?raw=true"
+          alt="Curso de Engenharia da Computação e Inteligência Artificial – CECIA"
+        >
+      </a>
+
     </div>
+
+    <nav class="header-nav">
+      <a href="https://cecia.ufsj.edu.br/">Home</a>
+      <a href="https://ceciaufsj.github.io/cecia-logos/">Logos</a>
+      <a href="https://ceciaufsj.github.io/cecia-colegiado/">Colegiado</a>
+      <a href="https://ceciaufsj.github.io/cecia-nde/">NDE</a>
+      <a href="https://ceciaufsj.github.io/cecia-requerimento-eletronico/#">Requerimento Eletrônico</a>
+      <a href="https://ceciaufsj.github.io/cecia-tcc/">TCC</a>
+      <a href="https://ceciaufsj.github.io/cecia-projetopedagogico/">PPC</a>
+      <a href="https://ceciaufsj.github.io/cecia-monitoria/">Monitoria</a>
+      <a href="https://ceciaufsj.github.io/cecia-horarios/">Horários</a>
+      <a href="https://ceciaufsj.github.io/cecia-editais/">Editais</a>
+      <a href="https://ceciaufsj.github.io/cecia-atividades-complementares/">Atividades Complementares</a>
+      <a href="https://ceciaufsj.github.io/cecia-extensao/">Atividades de Extensão</a>
+      <a href="https://ceciaufsj.github.io/cecia-inscricao-periodica/">Inscrição Periódica</a>
+      <a href="https://ceciaufsj.github.io/cecia-servidores/">Servidores do Curso</a>
+      <a href="https://ceciaufsj.github.io/cecia-tabela-equivalencia/">Equivalência de Disciplinas</a>
+      <a href="https://ceciaufsj.github.io/cecia-transferencia/">Transferência de Alunos</a>
+      <a href="https://ceciaufsj.github.io/cecia-estagio/">Estágio Curricular</a>
+    </nav>
+
   </div>
-</a>
+</header>
 
 <div class="main">
 
